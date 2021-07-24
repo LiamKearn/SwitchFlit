@@ -43,7 +43,7 @@ You'll see that it takes the name of the DataObject you have made SwitchFlitable
 
 ```html
     ...
-    <% include SwitchFlit DataObject="WeirdlyNamedDataObject" Alias="NiceName" %>
+    <% include SwitchFlit DataObject="WeirdlyNamedDataObject", Alias="NiceName" %>
 ```
 
 You should now be able to visit your page and invoke the UI with Cmd + K on macOS & iOS, or CTRL + K on Windows & Linux.
