@@ -1,7 +1,12 @@
 <?php
 
-use SwitchFlit\SwitchFlitable;
-use SwitchFlit\WithCustomQuery;
+namespace Cheddam\SwitchFlit\Tests;
+
+use Cheddam\SwitchFlit\SwitchFlitable;
+use Cheddam\SwitchFlit\WithCustomQuery;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataObject;
 
 class SwitchFlitControllerTest extends FunctionalTest
 {
@@ -136,10 +141,10 @@ class SwitchFlitDataObjectWithCustomQuery extends DataObject implements SwitchFl
     }
 
     /**
-     * @param \DataList $data The original DataList.
-     * @return \DataList The DataList with custom filters applied.
+     * @param DataList $data The original DataList.
+     * @return DataList The DataList with custom filters applied.
      */
-    public static function SwitchFlitQuery(\DataList $data)
+    public static function SwitchFlitQuery(DataList $data)
     {
         return $data->filter(['Type' => 'Valid']);
     }

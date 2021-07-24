@@ -1,19 +1,24 @@
 {
     "name": "cheddam/silverstripe-switchflit",
     "description": "Provides a quick switch UI based on your DataObject.",
-    "type": "silverstripe-module",
-    "extra": {
-        "installer-name": "switchflit"
-    },
+    "type": "silverstripe-vendormodule",
     "require": {
-		"php": "^5.4",
-        "silverstripe/framework": "^3.1"
+		"php": "^7",
+        "silverstripe/framework": "^4"
     },
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Garion Herman",
-            "email": "garion@silverstripe.com"
+            "email": "garion@silverstripe.com",
+            "role": "Author"
         }
-    ]
+    ],
+    "extra": {
+        "installer-name": "switchflit",
+        "expose": [
+            "css",
+            "js"
+        ]
+    }
 }

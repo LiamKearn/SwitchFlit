@@ -1,6 +1,6 @@
 <?php
 
-namespace SwitchFlit;
+namespace Cheddam\SwitchFlit;
 
 interface SwitchFlitable
 {

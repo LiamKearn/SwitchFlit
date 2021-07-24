@@ -29,5 +29,5 @@
     </div>
 </div>
 
-<% require css('switchflit/css/dist/switchflit.css') %>
-<% require javascript('switchflit/js/dist/switchflit.js') %>
+<% require css('cheddam/switchflit: css/dist/switchflit.css') %>
+<% require javascript('cheddam/switchflit: js/dist/switchflit.js') %>

@@ -1,8 +1,11 @@
 <?php
 
-namespace SwitchFlit;
+namespace Cheddam\SwitchFlit;
 
-class SwitchFlitController extends \Controller
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
+
+class SwitchFlitController extends Controller
 {
     private static $url_handlers = [
         '$DataObject/records' => 'getRecordsForDataObject'
@@ -15,13 +18,13 @@ class SwitchFlitController extends \Controller
     /**
      * Pulls all items from a SwitchFlitable DataObject and returns them as JSON.
      *
-     * @param \SS_HTTPRequest $request The current request.
+     * @param HTTPRequest $request The current request.
      * @return string The data in JSON format.
      *
      * @todo Clean up response handling.
      * @todo Allow custom columns? Pagination considerations?
      */
-    public function getRecordsForDataObject(\SS_HTTPRequest $request)
+    public function getRecordsForDataObject(HTTPRequest $request)
     {
         $dataobject = $request->param('DataObject');
 

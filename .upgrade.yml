@@ -1,0 +1,5 @@
+mappings:
+  SwitchFlit\SwitchFlitController: Cheddam\SwitchFlit\SwitchFlitController
+  SwitchFlit\SwitchFlitable: Cheddam\SwitchFlit\SwitchFlitable
+  SwitchFlit\WithCustomQuery: Cheddam\SwitchFlit\WithCustomQuery
+  SwitchFlitControllerTest: Cheddam\SwitchFlit\Tests\SwitchFlitControllerTest
