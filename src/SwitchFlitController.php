@@ -2,9 +2,16 @@
 
 namespace Cheddam\SwitchFlit;
 
+use Cheddam\SwitchFlit\SwitchFlitable;
+use Cheddam\SwitchFlit\WithCustomQuery;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\ORM\DataObject;
 
+/**
+ * SwitchFlitController
+ * @todo clean up security.
+ */
 class SwitchFlitController extends Controller
 {
     private static $url_handlers = [
@@ -12,8 +19,21 @@ class SwitchFlitController extends Controller
     ];
 
     private static $allowed_actions = [
-        'getRecordsForDataObject'
+        'getRecordsForDataObject',
+        'index' => '->denyIndex'
     ];
+    
+    /**
+     * denyIndex
+     * ---
+     * Convoluted way to deny access to everyone including escalated users,
+     * Silverstripe does a permission check before checking falsy and 'index' => false will been seen as a permission code
+     * 
+     * @return false
+     */
+    public function denyIndex() {
+        return false;
+    }
 
     /**
      * Pulls all items from a SwitchFlitable DataObject and returns them as JSON.
@@ -26,23 +46,23 @@ class SwitchFlitController extends Controller
      */
     public function getRecordsForDataObject(HTTPRequest $request)
     {
-        $dataobject = $request->param('DataObject');
+        $dataobject = urldecode($request->param('DataObject'));
 
         if (! class_exists($dataobject)) {
             return $this->sendError('The class ' . $dataobject . ' does not exist.');
         }
 
-        if (! in_array('DataObject', class_parents($dataobject))) {
+        if (! in_array(DataObject::class, class_parents($dataobject))) {
             return $this->sendError('The class ' . $dataobject . ' is not a DataObject.');
         }
 
-        if (! in_array('SwitchFlit\SwitchFlitable', class_implements($dataobject))) {
+        if (! in_array(SwitchFlitable::class, class_implements($dataobject))) {
             return $this->sendError('The class ' . $dataobject . ' is not SwitchFlitable.');
         }
 
         $records = $dataobject::get();
 
-        if (in_array('SwitchFlit\WithCustomQuery', class_implements($dataobject))) {
+        if (in_array(WithCustomQuery::class, class_implements($dataobject))) {
             $records = $dataobject::SwitchFlitQuery($records);
         }
 

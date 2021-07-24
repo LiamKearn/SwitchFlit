@@ -31,19 +31,17 @@ class MyDataObject extends DataObject implements SwitchFlitable
     }
 }
 ```
-    
-Finally, you'll need to include the SwitchFlit UI in your template. This generally fits best in the bottom of your top level template, and will look something along these lines:
 
-```html
-    ...
-    <% include SwitchFlit DataObject="MyDataObject" %>
-```
+_SS4 Upgrade note, For now just url encode the FQN of your dataobject and supply that to the DataObject argument and then use the Alias Argument.
+In the future it would be nice to further update the module in order to use the singular/plural name from the dataobject and also encode the FQN automatically._
+
+Finally, you'll need to include the SwitchFlit UI in your template. This generally fits best in the bottom of your top level template, and will look something along these lines:
 
 You'll see that it takes the name of the DataObject you have made SwitchFlitable. You can also specify an alias, in case the name of your DataObject isn't user friendly:
 
 ```html
     ...
-    <% include SwitchFlit DataObject="WeirdlyNamedDataObject", Alias="NiceName" %>
+    <% include SwitchFlit DataObject="Vendorname%5CSubnamespace%5CSubnamespace%5CSubclassOfDataobject", Alias="Dataobject" %>
 ```
 
 You should now be able to visit your page and invoke the UI with Cmd + K on macOS & iOS, or CTRL + K on Windows & Linux.
