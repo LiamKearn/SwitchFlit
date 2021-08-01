@@ -16,6 +16,7 @@ use SilverStripe\ORM\DataObject;
  * @todo fix vue bug where using keyboard down you can scroll past the limited 5 results. Should bounce back to top like alfred
  * @todo theme to suit a standard ss4 CMS
  * @todo tests for changes & ss4
+ * @todo reminify js - Not minified for some reason.
  */
 class SwitchFlitController extends Controller
 {

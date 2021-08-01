@@ -30,6 +30,7 @@ new Vue({
     records: [],
     fuse: null,
     query: '',
+    switchflitprompt: '',
     selectedResult: 0,
   },
 
@@ -51,6 +52,9 @@ new Vue({
       return this.states[this.currentState].description;
     },
     queryPlaceholder() {
+      if (this.switchflitprompt.length > 0) {
+        return this.switchflitprompt
+      }
       return `Find ${indefiniteArticle(this.alias)} ${this.alias}...`;
     },
   },
@@ -95,6 +99,8 @@ new Vue({
             this.records = parsedBody.items;
 
             this.fuse = new Fuse(this.records, { keys: ['title'] });
+
+            this.switchflitprompt = parsedBody.switchflitprompt;
 
             this.currentState = 'ready';
           });
