@@ -3,6 +3,6 @@ Name: switchflit
 After:
   - 'framework/*'
 ---
-Director:
+SilverStripe\Control\Director:
   rules:
-    'switchflit': 'SwitchFlit\SwitchFlitController'
+    'switchflit': 'Cheddam\SwitchFlit\SwitchFlitController'

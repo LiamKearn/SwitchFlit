@@ -12,6 +12,12 @@
             "name": "Garion Herman",
             "email": "garion@silverstripe.com",
             "role": "Author"
+        },
+        {
+            "name": "Liam Kearney",
+            "email": "liam@sproutlabs.com.au",
+            "role": "Update and Theme for SS4",
+            "website": "https://sproutlabs.com.au"
         }
     ],
     "extra": {
