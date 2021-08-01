@@ -72,7 +72,7 @@ class SwitchFlitController extends Controller
 
             if (!$records instanceof ArrayList) {
                 return $this->sendError(
-                    'The class ' . $dataobject
+                    'The class ' . class_name($dataobject)
                     . ' attempts to implement SwitchFlitAggregator but does not return a ArrayList.'
                 );
             }
