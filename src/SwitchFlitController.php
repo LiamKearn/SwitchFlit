@@ -2,10 +2,12 @@
 
 namespace Cheddam\SwitchFlit;
 
+use \Exception;
 use Cheddam\SwitchFlit\SwitchFlitable;
 use Cheddam\SwitchFlit\WithCustomQuery;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 
 /**
@@ -13,6 +15,7 @@ use SilverStripe\ORM\DataObject;
  * ---
  * @todo fix vue bug where using keyboard down you can scroll past the limited 5 results. Should bounce back to top like alfred
  * @todo theme to suit a standard ss4 CMS
+ * @todo tests for changes & ss4
  */
 class SwitchFlitController extends Controller
 {
@@ -62,7 +65,20 @@ class SwitchFlitController extends Controller
             return $this->sendError('The class ' . $dataobject . ' is not SwitchFlitable.');
         }
 
-        $records = $dataobject::get();
+        if (in_array(SwitchFlitAggregator::class, class_implements($dataobject))) {
+
+            $records = $dataobject::SwitchFlitArrayList();
+
+            if (!$records instanceof ArrayList) {
+                return $this->sendError(
+                    'The class ' . $dataobject
+                    . ' attempts to implement SwitchFlitAggregator but does not return a ArrayList.'
+                );
+            }
+
+        } else {
+            $records = $dataobject::get();
+        }
 
         if (in_array(WithCustomQuery::class, class_implements($dataobject))) {
             $records = $dataobject::SwitchFlitQuery($records);
@@ -70,7 +86,11 @@ class SwitchFlitController extends Controller
 
         $data = [];
 
-        $results = $this->prepareRecords($records);
+        try {
+            $results = $this->prepareRecords($records);
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage());
+        }
 
         $response = $this->getResponse();
 
@@ -81,12 +101,23 @@ class SwitchFlitController extends Controller
         return $response;
     }
 
+    /**
+     * prepareRecords
+     *
+     * @throws \Exception Class does not implement switchflitable.
+     * @param  ArrayList $records
+     * @return array
+     */
     public function prepareRecords($records)
     {
         $data = [];
 
         foreach ($records as $record) {
             if (! $record->canView()) continue;
+            if (! in_array(SwitchFlitable::class, class_implements($record))) {
+                throw new \Exception('Class: ' . get_class($record) . ', was found in the ArrayList but does not implement SwitchFlitable.');
+                continue;
+            }
 
             $data[] = [
                 'title' => $record->SwitchFlitTitle(),
