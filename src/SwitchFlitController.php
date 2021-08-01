@@ -17,6 +17,7 @@ use SilverStripe\ORM\DataObject;
  * @todo theme to suit a standard ss4 CMS
  * @todo tests for changes & ss4
  * @todo reminify js - Not minified for some reason.
+ * @todo unbreak WithCustomQuery, check type it gets from arraylist is safe.
  */
 class SwitchFlitController extends Controller
 {
