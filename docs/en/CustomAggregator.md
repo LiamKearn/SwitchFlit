@@ -40,6 +40,10 @@ class MyDataObject extends DataObject implements SwitchFlitable, SwitchFlitAggre
 Now with this example `MyDataObject` is both an Aggregator of `SwitchFlitables` and a `SwitchFlitable` itself.
 While using a switchflit switcher that referers to this dataobject all instance of `MyDataObject` will be switchable.
 
+<br/>
+<br/>
+<br/>
+
 Lets move onto a more interesting example:
 
 _App/src/AnimalHouse/Dog.php_
@@ -112,7 +116,8 @@ class Animal extends DataObject implements SwitchFlitAggregator
 ```
 
 Now when using a switcher which references `Animal` results will include both dogs n cats n dogs n cats n dogs n cats. (Sorry.)
+
 There are two drawbacks to using a CustomAggregator:
-    - Much slower. Multiple checks are preformed on every record.
-    - Every Dataobject you include using `SwitchFlitAggregator::SwitchFlitArrayList`'s arraylist still needs to implement `SwitchFlitable`
+  - Much slower. Multiple checks are preformed on every record.
+  - Every Dataobject you include using `SwitchFlitAggregator::SwitchFlitArrayList`'s arraylist still needs to implement `SwitchFlitable`
 
