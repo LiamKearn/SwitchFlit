@@ -29,17 +29,33 @@ class SwitchFlitController extends Controller
         'getRecordsForDataObject',
         'index' => '->denyIndex'
     ];
-    
+
     /**
      * denyIndex
      * ---
-     * Convoluted way to deny access to everyone including escalated users,
+     * Convoluted way to deny access to everyone including escalated users on dev env,
      * Silverstripe does a permission check before checking falsy and 'index' => false will been seen as a permission code
      * 
      * @return false
      */
     public function denyIndex() {
         return false;
+    }
+
+    private static $key_combo = 'ctrl + 75';
+
+    private static $key_combo_mac = 'meta + 75';
+
+    /**
+     * Provide YAML-specified configuration to the browser
+     * @return string JSON-encoded configuration
+     */
+    public function getConfig()
+    {
+        return (object) [
+            'key_combo' => explode('+', $this->config()->key_combo),
+            'key_combo_mac' => explode('+', $this->config()->key_combo_mac),
+        ];
     }
 
     /**
@@ -137,7 +153,8 @@ class SwitchFlitController extends Controller
         $response->setStatusCode(400);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode([
-            'errors' => [$error]
+            'errors' => [$error],
+            'config' => $this->getConfig(),
         ]));
 
         return $response;
