@@ -114,7 +114,10 @@ class SwitchFlitController extends Controller
 
         $response->setStatusCode(200);
         $response->addHeader('Content-Type', 'application/json');
-        $response->setBody(json_encode(['items' => $results]));
+        $response->setBody(json_encode([
+            'items' => $results,
+            'config' => $this->getConfig(),
+        ]));
 
         return $response;
     }
@@ -153,8 +156,7 @@ class SwitchFlitController extends Controller
         $response->setStatusCode(400);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode([
-            'errors' => [$error],
-            'config' => $this->getConfig(),
+            'errors' => [$error]
         ]));
 
         return $response;
