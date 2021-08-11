@@ -42,9 +42,9 @@ class SwitchFlitController extends Controller
         return false;
     }
 
-    private static $key_combo = 'ctrl + 75';
+    private static $key_combo = 'ctrl+75';
 
-    private static $key_combo_mac = 'meta + 75';
+    private static $key_combo_mac = 'meta+75';
 
     /**
      * Provide YAML-specified configuration to the browser

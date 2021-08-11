@@ -118,7 +118,8 @@ new Vue({
 
   ready() {
     document.addEventListener('keydown', (event) => {
-      if (event.code === 'Escape') {
+
+      if (event.key === 'Escape') {
         this.hide();
       } else if (['MacIntel', 'iPhone', 'iPad', 'iPod'].indexOf(navigator.platform) > -1) {
         if(typeof this.config.key_combo_mac !== 'undefined' && this.config.key_combo_mac.length > 0) {
@@ -131,15 +132,15 @@ new Vue({
       }
 
       var matchingKeys = 0;
-
+      // console.log(keys)
       keys.forEach(function(key) {
-        if(event.code === key) {
+        if(event.key.trim() === key) {
           matchingKeys++;
         } else if (
-          key.trim() === 'Alt' && event.altKey ||
-          key.trim() === 'Ctrl' && event.ctrlKey ||
-          key.trim() === 'Meta' && event.metaKey ||
-          key.trim() === 'Shift' && event.shiftKey
+          key === 'Alt' && event.altKey ||
+          key === 'Ctrl' && event.ctrlKey ||
+          key === 'Meta' && event.metaKey ||
+          key === 'Shift' && event.shiftKey
         ) {
           matchingKeys++;
         }
