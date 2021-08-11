@@ -118,7 +118,7 @@ new Vue({
 
   ready() {
     document.addEventListener('keydown', (event) => {
-      if (event.keyCode === 27) {
+      if (event.code === 27) {
         this.hide();
       } else if (['MacIntel', 'iPhone', 'iPad', 'iPod'].indexOf(navigator.platform) > -1) {
         if(typeof this.config.key_combo_mac !== 'undefined' && this.config.key_combo_mac.length > 0) {
@@ -133,7 +133,7 @@ new Vue({
       var matchingKeys = 0;
 
       keys.forEach(function(key) {
-        if(parseInt(key) >= 0 && event.keyCode === parseInt(key)) {
+        if(parseInt(key) >= 0 && event.code === parseInt(key)) {
           matchingKeys++;
         } else if (
           key.trim() === 'alt' && event.altKey ||
