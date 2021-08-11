@@ -4,6 +4,7 @@ namespace Cheddam\SwitchFlit;
 
 use \Exception;
 use Cheddam\SwitchFlit\SwitchFlitable;
+use Cheddam\SwitchFlit\SwitchFlitLangProvider;
 use Cheddam\SwitchFlit\WithCustomQuery;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
@@ -102,6 +103,8 @@ class SwitchFlitController extends Controller
             $records = $dataobject::SwitchFlitQuery($records);
         }
 
+        $switchFlitPrompt = (in_array(SwitchFlitLangProvider::class, class_implements($dataobject))) ? $dataobject::SearchPrompt() : 'Search for something:';
+
         $data = [];
 
         try {
@@ -117,6 +120,7 @@ class SwitchFlitController extends Controller
         $response->setBody(json_encode([
             'items' => $results,
             'config' => $this->getConfig(),
+            'switchflitprompt' => $switchFlitPrompt
         ]));
 
         return $response;
